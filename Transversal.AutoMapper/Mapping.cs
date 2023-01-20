@@ -16,7 +16,7 @@ namespace Transversal.AutoMapper
             {
                 PropertyId = Guid.NewGuid().ToString(),
                 Description = propertyDto.Description,
-                Prece = propertyDto.Prece,
+                Prece = int.Parse(propertyDto.Prece),
                 TypPropertyId = propertyDto.TypPropertyId,
                 State = propertyDto.State,
                 TypeContract = propertyDto.TypeContract,

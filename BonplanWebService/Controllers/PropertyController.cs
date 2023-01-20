@@ -17,6 +17,17 @@ namespace BonplanWebService.Controllers
             _propertyAplication = propertyAplication;
             _propertyByMunicipio = propertyByMunicipio;
         }
+        [HttpPost]
+        public async Task<IActionResult> Filters([FromBody] SearchFilterDto filtro)
+        {
+
+            Response<IEnumerable<GetPropertyDto>> response = await _propertyAplication.GetAllAsyncFilters(filtro);
+            if (response.IsSuccess == false)
+            {
+                return BadRequest(new { messge = "Error en la consulta a Db" });
+            }
+            return Ok(response);
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetById([FromQuery] string propertyId)
