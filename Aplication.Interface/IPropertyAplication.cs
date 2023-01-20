@@ -14,6 +14,7 @@ namespace Aplication.Interface
         Task<Response<bool>> DeleteAsync(string propertyId);
         Task<Response<GetPropertyDto>> GetAsync(string propertyId);
         Task<Response<IEnumerable<GetPropertyDto>>> GetAllAsync();
+        Task<Response<IEnumerable<GetPropertyDto>>> GetAllAsyncFilters(SearchFilterDto filters);
         Task<ResponsePangination<IEnumerable<GetPropertyDto>>> GetAllWithPaginationAsync(int PageNumber, int PageSize);
         #endregion
     }

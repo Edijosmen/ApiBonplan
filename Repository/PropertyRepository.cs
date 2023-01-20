@@ -75,7 +75,7 @@ namespace Infrastructure.Repository
             IEnumerable < Property >d = new List<Property>();
             using (var connection = _context.CrearConnecion())
             {
-                var query = @"SELECT p.PropertyId,p.Description,p.Prece,p.TypeContract,p.Dimencion,p.State,tc.PropertyName
+                var query = @"SELECT p.PropertyId,p.Description,p.Prece,p.TypeContract,p.Dimencion,p.State,tc.PropertyName,p.Localidad,p.nHabitacion,p.nBanio
                                 FROM Property p 
                                 JOIN TypProperty tc ON p.TypPropertyId = tc.TypPropertyId
 

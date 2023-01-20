@@ -13,7 +13,7 @@ namespace Entity
        
         public string PropertyId { get; set; }
         public string Description { get; set; }
-        public string Prece { get; set; }
+        public float Prece { get; set; }
         public int TypeContract { get; set; }
         public string PropertyName { get; set; }
         public int State { get; set; }
@@ -21,6 +21,9 @@ namespace Entity
         public int TypPropertyId { get; set; }
         public string Mcip_Name { get; set; }
         public string Dpart_Name { get; set; }
+        public string Localidad { get; set; }
+        public int NHabitacion { get; set; }
+        public int NBanio { get; set; }
         public ICollection<ImageStore> ImageStores { get; set; }
     }
 }

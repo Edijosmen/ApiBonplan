@@ -5,6 +5,7 @@ using Domain.Interface;
 using Entity;
 using Transversal.common;
 using Transversal.AutoMapper;
+using System.Linq;
 
 namespace Aplication.main
 {
@@ -58,6 +59,56 @@ namespace Aplication.main
             catch (Exception ex)
             {
                 response.RMessage=ex.Message;
+            }
+            return response;
+        }
+
+        public async Task<Response<IEnumerable<GetPropertyDto>>> GetAllAsyncFilters(SearchFilterDto filters)
+        {
+            Response<IEnumerable<GetPropertyDto>> response = new();
+            try
+            {
+                var property = await _propertyDomain.GetAllAsync();
+                response.Data = _mapper.Map<IEnumerable<GetPropertyDto>>(property);
+                //filters
+                if (!string.IsNullOrEmpty(filters.search))
+                {
+                    response.Data = response.Data.Where(x =>
+                                    x.Localidad.Contains(filters.search)
+                                    || x.Mcip_Name.Contains(filters.search)
+                                    || x.Dpart_Name.Contains(filters.search)
+                                    || x.PropertyName.Contains(filters.search)).ToList();
+                }
+                if (!string.IsNullOrEmpty(filters.Estado))
+                {
+                    response.Data = response.Data.Where(x => 
+                                                        x.State==(int.Parse(filters.Estado))).ToList();
+                }
+                if(!string.IsNullOrEmpty(filters.Desde) && !string.IsNullOrEmpty(filters.Hasta))
+                {
+                    response.Data = response.Data.Where(x => x.Prece >= int.Parse(filters.Desde) && x.Prece <= int.Parse(filters.Hasta)).ToList();
+                }
+                if (!string.IsNullOrEmpty(filters.NHAbitacion))
+                {
+                    response.Data = response.Data.Where(x =>
+                                                        x.NHabitacion == int.Parse(filters.NHAbitacion)).ToList();
+                }
+                if (!string.IsNullOrEmpty(filters.NBano))
+                {
+                    response.Data = response.Data.Where(x =>
+                                                        x.NBanio == int.Parse(filters.NBano)).ToList();
+                }
+
+                //response.Data = await _propertyDomain.GetPropertyAllAsync();
+                if (response.Data != null)
+                {
+                    response.IsSuccess = true;
+                    response.RMessage = "Consulta Exitosa";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.RMessage = ex.Message;
             }
             return response;
         }
