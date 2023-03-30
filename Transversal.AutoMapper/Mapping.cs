@@ -21,6 +21,10 @@ namespace Transversal.AutoMapper
                 State = propertyDto.State,
                 TypeContract = propertyDto.TypeContract,
                 Dimencion = propertyDto.Dimencion,
+                NBanio = propertyDto.NBanio,
+                NHabitacion = propertyDto.NHabitacion,
+                Caracteristicas = propertyDto.Caracteristicas,
+                Localidad = propertyDto.Localidad,
             };
             return property;
         }

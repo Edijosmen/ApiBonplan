@@ -22,6 +22,7 @@ namespace Aplication.Dto
         public string Localidad { get; set; }
         public int NHabitacion { get; set; }
         public int NBanio { get; set; }
+        public string Caracteristicas { get; set; }
         public ICollection<ImageStore> ImageStores { get; set; }
 
     }
