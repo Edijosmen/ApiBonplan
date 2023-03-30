@@ -20,8 +20,8 @@ namespace Infrastructure.Repository
         {
             using (var connection = _context.CrearConnecion())
             {
-                var query = "INSERT INTO Property (PropertyId,Description,Prece,TypeContract,State,Dimencion,TypPropertyId)" +
-                            "              VALUES(@PropertyId,@Description,@Prece,@TypeContract,@State,@Dimencion,@TypPropertyId);          ";
+                var query = "INSERT INTO Property (PropertyId,Description,Prece,TypeContract,State,Dimencion,TypPropertyId,Localidad,nHabitacion,nBanio,Caracteristicas)" +
+                            "              VALUES(@PropertyId,@Description,@Prece,@TypeContract,@State,@Dimencion,@TypPropertyId,@Localidad,@nHabitacion,@nBanio,@Caracteristicas);          ";
 
                 var result = await connection.ExecuteAsync(query, entity);
                 return result > 0;
@@ -146,7 +146,7 @@ namespace Infrastructure.Repository
             using (var connection = _context.CrearConnecion())
             {
                 var param = new { PropertyId = propertyId };
-                var query = @"SELECT p.PropertyId,p.Description,p.Prece,p.TypeContract,p.Dimencion,p.State,tc.PropertyName
+                var query = @"SELECT p.PropertyId,p.Description,p.Prece,p.TypeContract,p.Dimencion,p.State,tc.PropertyName,p.Localidad,p.nHabitacion,p.nBanio,p.Caracteristicas
                                 FROM Property p
                                 JOIN TypProperty tc ON p.TypPropertyId = tc.TypPropertyId
 

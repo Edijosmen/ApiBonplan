@@ -34,7 +34,7 @@ namespace BonplanWebService.Controllers
 
             for (int i = 0; i < imgdto.Image.Count; i++)
             {
-                string ulr = await _handlerArchivos.GuardarImagen(imgdto.Image[0], galeria);
+                string ulr = await _handlerArchivos.GuardarImagen(imgdto.Image[i], galeria);
                 img.Image.Add(ulr);
 
             }

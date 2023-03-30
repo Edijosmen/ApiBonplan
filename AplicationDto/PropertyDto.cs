@@ -11,7 +11,10 @@ namespace Aplication.Dto
         public int TypPropertyId { get; set; }
         public int Mcip_Id { get; set; }
         public int Dpart_Id { get; set; }
-
+        public string Localidad { get; set; }
+        public int NHabitacion { get; set; }
+        public int NBanio { get; set; }
+        public string Caracteristicas { get; set; }
 
     }
 }
