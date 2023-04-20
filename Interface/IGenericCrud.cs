@@ -9,7 +9,7 @@ namespace Infrastructure.Interface
     public interface IGenericCrud<T> where T : class
     {
         #region Métodos ASíncronico
-        Task<bool> InsertAsync(T entity);
+        Task<string> InsertAsync(T entity);
         Task<bool> UpdateAsync(string id, T entity);
         Task<bool> DeleteAsync(string id);
         Task<T> GetAsync(string id);

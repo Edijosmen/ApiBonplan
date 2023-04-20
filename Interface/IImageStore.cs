@@ -11,5 +11,6 @@ namespace Infrastructure.Interface
     {
         Task<bool> CreateImageStoreAsync(ImageStore image);
         Task<IEnumerable<ImageStore>> GetImageStoresByProperIdAsync(string propertyId);
+        Task<int> DeleteAsync( string idReferencia);
     }
 }

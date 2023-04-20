@@ -18,6 +18,7 @@
     <ProjectReference Include="..\Domain.Core\Domain.Core.csproj" />
     <ProjectReference Include="..\Entity\Entity.csproj" />
     <ProjectReference Include="..\Repository\Infrastructure.Repository.csproj" />
+    <ProjectReference Include="..\Transversal.Auth\Transversal.Auth.csproj" />
     <ProjectReference Include="..\Transversal.AutoMapper\Transversal.AutoMapper.csproj" />
   </ItemGroup>
 

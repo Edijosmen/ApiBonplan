@@ -11,5 +11,6 @@ namespace Domain.Interface
     {
         Task<bool> CreateImageStoreAsync(ImageStore image);
         Task<IEnumerable<ImageStore>> GetImageStoresByProperIdAsync(string propertyId);
+        Task<int> DelecteAsync(string idReferencia);
     }
 }

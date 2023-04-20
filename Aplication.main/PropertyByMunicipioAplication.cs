@@ -21,6 +21,22 @@ namespace Aplication.main
             _mapper = mapper;
         }
 
+        public async Task<Response<bool>> DelecteAsync(string idRefencia)
+        {
+            Response<bool> response = new Response<bool>();
+            int rest = await _domain.DeleteAsinc(idRefencia);
+            if(rest > 0)
+            {
+                response.Data = true;
+                response.IsSuccess = true;
+                response.RMessage = $"Se eliminaron {rest} filas.";
+            }
+            response.Data = false;
+            response.IsSuccess = false;
+            response.RMessage = "No se encontraron filas para eliminar.";
+            return response;
+        }
+        
         public Task<Response<IEnumerable<PropertyDto>>> FilterByDepartamento(PropertyDto propertyDto)
         {
             throw new NotImplementedException();

@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Domain.Interface\Domain.Interface.csproj" />
     <ProjectReference Include="..\Repository\Infrastructure.Repository.csproj" />
+    <ProjectReference Include="..\Transversal.Auth\Transversal.Auth.csproj" />
   </ItemGroup>
 
 </Project>

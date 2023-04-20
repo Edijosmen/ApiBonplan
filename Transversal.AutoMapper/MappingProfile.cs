@@ -15,6 +15,7 @@ namespace Transversal.AutoMapper
             CreateMap<PropertyMdl, GetPropertyDto>().ReverseMap();
             CreateMap<Municipio, GetMunicipioDto>().ReverseMap();
             CreateMap<Departamento, DepartamentoDto>().ReverseMap();
+            CreateMap<User, UserDto>().ReverseMap();
         }
         
     }

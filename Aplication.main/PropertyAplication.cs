@@ -13,13 +13,15 @@ namespace Aplication.main
     {
         private readonly IPropertyDomain _propertyDomain;
         private readonly IPropertyByMunicipioDomain _propertyByMunicipioDomain;
+        private readonly IImageStoreDomain _imageStoreDomain;
         private readonly IMapper _mapper;
 
-        public PropertyAplication(IPropertyDomain propertyDomain, IMapper mapper, IPropertyByMunicipioDomain propertyByMunicipioDomain)
+        public PropertyAplication(IPropertyDomain propertyDomain, IMapper mapper, IPropertyByMunicipioDomain propertyByMunicipioDomain, IImageStoreDomain imageStoreDomain)
         {
             _propertyDomain = propertyDomain;
             _mapper = mapper;
             _propertyByMunicipioDomain = propertyByMunicipioDomain;
+           _imageStoreDomain = imageStoreDomain;
         }
 
         public async Task<Response<bool>> DeleteAsync(string propertyId)
@@ -27,11 +29,16 @@ namespace Aplication.main
             Response<bool> response = new();
             try
             {
-                response.Data = await _propertyDomain.DeleteAsync(propertyId);
-                if (response.Data == true)
+                int rest1 = await _propertyByMunicipioDomain.DeleteAsinc(propertyId);
+                int rest2 = await _imageStoreDomain.DelecteAsync(propertyId);
+                if(rest1 >0 && rest2 > 0)
                 {
-                    response.IsSuccess = true;
-                    response.RMessage = "Eliminación Exitosa!!";
+                    response.Data = await _propertyDomain.DeleteAsync(propertyId);
+                    if (response.Data == true)
+                    {
+                        response.IsSuccess = true;
+                        response.RMessage = "Eliminación Exitosa!!";
+                    }
                 }
             }
             catch (Exception ex)
@@ -82,7 +89,7 @@ namespace Aplication.main
                 if (!string.IsNullOrEmpty(filters.Estado))
                 {
                     response.Data = response.Data.Where(x => 
-                                                        x.State==(int.Parse(filters.Estado))).ToList();
+                                                        x.TypeContract==(int.Parse(filters.Estado))).ToList();
                 }
                 if(!string.IsNullOrEmpty(filters.Desde) && !string.IsNullOrEmpty(filters.Hasta))
                 {
@@ -158,9 +165,9 @@ namespace Aplication.main
             return response;
         }
 
-        public async Task<Response<bool>> InsertAsync(PropertyDto propertyDto)
+        public async Task<Response<string>> InsertAsync(PropertyDto propertyDto)
         {
-            Response<bool> response = new();
+            Response<string> response = new();
             Property property = Mapping.Get_PropertyDto(propertyDto);
 
 
@@ -170,7 +177,7 @@ namespace Aplication.main
                 //Property property = _mapper.Map<Property>(customerDto);
                  response.Data = await _propertyDomain.InsertAsync(property);
                 bool success = await _propertyByMunicipioDomain.InsertAsync(pByMunicipio);
-                if (response.Data == true)
+                if (response.Data != null)
                 {
                     response.IsSuccess = true;
                     response.RMessage = "Registro Guardado!!";
@@ -183,13 +190,13 @@ namespace Aplication.main
             return response;
         }
 
-        public async Task<Response<bool>> UpdateAsync(string ID, PropertyDto propertyDto)
+        public async Task<Response<bool>> PropertyUpdateAsync(string ID, UpdPropertyDto propertyDto)
         {
             Response<bool> response =new();
             try
             {
-                Property property = _mapper.Map<Property>(propertyDto);
-                response.Data = await _propertyDomain.UpdateAsync(ID ,property);
+
+                response.Data = await _propertyDomain.PropertyUpdateAsync(ID,propertyDto);
                 if(response.Data == true)
                 {
                     response.IsSuccess = true;
@@ -201,6 +208,11 @@ namespace Aplication.main
                 response.RMessage = ex.Message;
             }
             return response;
+        }
+
+        public Task<Response<bool>> UpdateAsync(string propertyId, PropertyDto propertyDto)
+        {
+            throw new NotImplementedException();
         }
     }
 }

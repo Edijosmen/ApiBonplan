@@ -17,6 +17,11 @@ namespace Domain.Core
             _repository = repository;
         }
 
+        public async Task<int> DeleteAsinc(string idRefencia)
+        {
+            return await _repository.DeleteAsync(idRefencia);
+        }
+
         public Task<IEnumerable<Property>> FilterByDepartamento(int dpart_Id)
         {
             throw new NotImplementedException();

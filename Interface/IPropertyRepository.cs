@@ -9,5 +9,6 @@ namespace Infrastructure.Interface
     {
         Task<IEnumerable<PropertyMdl>> GetPropertyAllAsync();
         Task<Property> GetPropertyByIdAsync(string propertyId);
+        Task<bool> PropertyUpdateAsync(string PropertyId, UpdPropertyDto entity);
     }
 }
