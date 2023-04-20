@@ -16,7 +16,7 @@ namespace Infrastructure.Repository
             _context = context;
         }
 
-        public async Task<bool> InsertAsync(Property entity)
+        public async Task<string> InsertAsync(Property entity)
         {
             using (var connection = _context.CrearConnecion())
             {
@@ -24,24 +24,18 @@ namespace Infrastructure.Repository
                             "              VALUES(@PropertyId,@Description,@Prece,@TypeContract,@State,@Dimencion,@TypPropertyId,@Localidad,@nHabitacion,@nBanio,@Caracteristicas);          ";
 
                 var result = await connection.ExecuteAsync(query, entity);
-                return result > 0;
+                if (result > 0) return entity.PropertyId;
+                    return "0";
             }
         }
-        public async Task<bool> UpdateAsync(string PropertyId, Property entity)
+        public async Task<bool> PropertyUpdateAsync(string PropertyId, UpdPropertyDto entity)
         {
-            entity.PropertyId = PropertyId;
+           
             using (var connection = _context.CrearConnecion())
             {
-                var query = "UPDATE Property SET " +
-                                            "Description=@Description," +
-                                            "Prece=@Prece," +
-                                            "TypeContract=@TypeContract," +
-                                            "State=@State," +
-                                            "Dimencion=@Dimencion," +
-                                            "TypPropertyId=@TypPropertyId " +
-                                            "WHERE " +
-                                            "PropertyId=@PropertyId";
-                var result = await connection.ExecuteAsync(query, entity);
+                var param = new { PropertyId = PropertyId, TypeContract = entity.TypeContract, State = entity.state };
+                string query = "UPDATE Db_Bonplan.dbo.Property SET TypeContract = @TypeContract, State = @State  WHERE PropertyId = @PropertyId;";
+                var result = await connection.ExecuteAsync(query, param );
                 return result > 0;
             }
         }
@@ -75,7 +69,7 @@ namespace Infrastructure.Repository
             IEnumerable < Property >d = new List<Property>();
             using (var connection = _context.CrearConnecion())
             {
-                var query = @"SELECT p.PropertyId,p.Description,p.Prece,p.TypeContract,p.Dimencion,p.State,tc.PropertyName,p.Localidad,p.nHabitacion,p.nBanio
+                var query = @"SELECT p.PropertyId,p.Description,p.Prece,p.TypeContract,p.Dimencion,p.TypPropertyId,p.State,tc.PropertyName,p.Localidad,p.nHabitacion,p.nBanio
                                 FROM Property p 
                                 JOIN TypProperty tc ON p.TypPropertyId = tc.TypPropertyId
 
@@ -176,6 +170,11 @@ namespace Infrastructure.Repository
                 //var result = await connection.QuerySingleOrDefaultAsync<PropertyMdl>(query,paramerts, commandType: System.Data.CommandType.StoredProcedure);
                 return property;
             }
+        }
+
+        public Task<bool> UpdateAsync(string id, Property entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

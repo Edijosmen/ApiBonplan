@@ -25,6 +25,17 @@ namespace Infrastructure.Repository
             }
         }
 
+        public async Task<int> DeleteAsync(string idReferencia)
+        {
+            using (var connection = _context.CrearConnecion())
+            {
+                string query = "Delete from Db_Bonplan.dbo.ImgStore where Property_Id =@PropertyId";
+                var param = new { PropertyId = idReferencia };
+                int rowfileAfect = await connection.ExecuteAsync(query,param);
+                return rowfileAfect;
+            }
+        }
+
         public async Task<IEnumerable<ImageStore>> GetImageStoresByProperIdAsync(string propertyId)
         {
             using (var connection = _context.CrearConnecion())

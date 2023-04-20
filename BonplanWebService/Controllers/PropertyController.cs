@@ -1,11 +1,13 @@
 ﻿using Aplication.Dto;
 using Aplication.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Transversal.common;
 
 namespace BonplanWebService.Controllers
 {
+    [Authorize]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class PropertyController : ControllerBase
@@ -77,12 +79,12 @@ namespace BonplanWebService.Controllers
             }
             return Ok(response);
         }
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update( string id, [FromBody] PropertyDto property)
+        [HttpPut]
+        public async Task<IActionResult> Update( [FromBody] UpdPropertyDto property)
         {
             if (property == null)
                 return BadRequest(new {message="parametros no puden estar vacios"});
-            var response = await _propertyAplication.UpdateAsync(id,property);
+            var response = await _propertyAplication.PropertyUpdateAsync(property.Id,property);
             if (response.IsSuccess == false)
             {
                 return NotFound(response.RMessage="no se puedo actualizar el registro");

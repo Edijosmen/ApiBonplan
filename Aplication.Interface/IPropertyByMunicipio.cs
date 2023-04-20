@@ -13,6 +13,6 @@ namespace Aplication.Interface
         Task<Response<bool>> InsertAsync(PropertyMunicipioDto propertyMunicipioDto);
         Task<Response<IEnumerable<PropertyDto>>> FilterByMunicipio ( PropertyDto propertyDto);
         Task<Response<IEnumerable<PropertyDto>>> FilterByDepartamento(PropertyDto propertyDto);
-
+        Task<Response<bool>> DelecteAsync(string idRefencia);
     }
 }

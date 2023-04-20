@@ -39,6 +39,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Transversal.AutoMapper", "T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Models", "Domain.Models\Domain.Models.csproj", "{EA860765-B17A-4DB7-940E-D66EA67D5EA3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transversal.Auth", "Transversal.Auth\Transversal.Auth.csproj", "{AD8904A2-90B4-4CE1-BE7F-9EF76F3E7015}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,10 @@ Global
 		{EA860765-B17A-4DB7-940E-D66EA67D5EA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA860765-B17A-4DB7-940E-D66EA67D5EA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA860765-B17A-4DB7-940E-D66EA67D5EA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD8904A2-90B4-4CE1-BE7F-9EF76F3E7015}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD8904A2-90B4-4CE1-BE7F-9EF76F3E7015}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD8904A2-90B4-4CE1-BE7F-9EF76F3E7015}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD8904A2-90B4-4CE1-BE7F-9EF76F3E7015}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,6 +121,7 @@ Global
 		{F7032EAB-1D75-4C02-9ECF-B1220451FAAE} = {FEC1FDD2-37DD-4C1A-B93A-6070F091448D}
 		{E4A1A4F7-7F8F-4BBB-B056-0F52AEF1BB43} = {1306F1A7-3B14-404B-BEAC-F57884604A85}
 		{EA860765-B17A-4DB7-940E-D66EA67D5EA3} = {CC4E56B1-3913-4D64-A634-A6E1CD74E464}
+		{AD8904A2-90B4-4CE1-BE7F-9EF76F3E7015} = {1306F1A7-3B14-404B-BEAC-F57884604A85}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {48D981E9-6B47-4C4F-B87F-A675C8E2F8EC}

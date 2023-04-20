@@ -1,4 +1,5 @@
 ﻿
+using Aplication.Dto;
 using Domain.Interface;
 using Domain.Models;
 using Entity;
@@ -14,7 +15,7 @@ namespace Domain.Core
             _repository = repository;
         }
 
-        public Task<bool> InsertAsync(Property entity)
+        public Task<string> InsertAsync(Property entity)
         {
             return _repository.InsertAsync(entity);
         }
@@ -54,6 +55,11 @@ namespace Domain.Core
         public async Task<Property> GetPropertyByIdAsync(string propertyId)
         {
            return await _repository.GetPropertyByIdAsync( propertyId);
+        }
+
+        public async Task<bool> PropertyUpdateAsync(string PropertyId, UpdPropertyDto entity)
+        {
+            return await _repository.PropertyUpdateAsync(PropertyId,entity);
         }
     }
 }

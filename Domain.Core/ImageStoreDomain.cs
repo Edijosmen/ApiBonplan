@@ -18,6 +18,11 @@ namespace Domain.Core
             return await _repository.CreateImageStoreAsync(image);
         }
 
+        public async Task<int> DelecteAsync(string idReferencia)
+        {
+           return await _repository.DeleteAsync(idReferencia);
+        }
+
         public async Task<IEnumerable<ImageStore>> GetImageStoresByProperIdAsync(string propertyId)
         {
             return await _repository.GetImageStoresByProperIdAsync(propertyId);

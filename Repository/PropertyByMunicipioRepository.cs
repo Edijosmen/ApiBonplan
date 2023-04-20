@@ -13,6 +13,31 @@ namespace Infrastructure.Repository
             _context = context;
         }
 
+        public async Task<int> DeleteAsync(string idReferencia)
+        {
+            using (var connection = _context.CrearConnecion())
+            {
+                string query = $"Delete from Db_Bonplan.dbo.PropertyByMunicipio where PropertyId = @PropertyId";
+                var parameters = new { PropertyId = idReferencia };
+
+                // Ejecutar la consulta
+                int rowsAffected = await connection.ExecuteAsync(query, parameters);
+
+                //if (rowsAffected > 0)
+                //{
+                //    // La eliminación fue exitosa
+                //    //return $"Se eliminaron {rowsAffected} filas.";
+
+                //}
+                //else
+                //{
+                //    // No se encontraron filas para eliminar
+                //    return "No se encontraron filas para eliminar.";
+                //}
+                return rowsAffected;
+            }
+        }
+
         public Task<IEnumerable<Property>> FilterByDepartamento(int dpart_Id)
         {
             throw new NotImplementedException();
